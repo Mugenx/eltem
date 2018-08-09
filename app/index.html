@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Hello World!</title>
+</head>
+
+<body>
+    <h1>Hello World!</h1>
+    <input type="file" id="path" webkitdirectory>
+    <button id="send">Send</button>
+    <script>
+        const {ipcRenderer} = require('electron');
+        const $ = require('jquery');
+
+        $('#send').on('click', function () {
+            var data = document.getElementById('path').files[0].path;
+            ipcRenderer.send('request-mainprocess-action', data);
+        });
+
+
+        ipcRenderer.on('mainprocess-response', (event, arg) => {
+            console.log(arg); // prints "Hello World!"
+        });
+    </script>
+</body>
+
+</html>
