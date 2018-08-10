@@ -4,26 +4,34 @@
 <head>
     <meta charset="UTF-8">
     <title>Hello World!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 </head>
 
 <body>
-    <h1>Hello World!</h1>
-    <input type="file" id="path" webkitdirectory>
-    <button id="send">Send</button>
-    <script>
-        const {ipcRenderer} = require('electron');
-        const $ = require('jquery');
+    <div class="wrapping">
+        <div>
+            <div id="loadsetting"></div>
+            <input class="btn" type="file" id="platformPath" webkitdirectory>
+            <input class="btn" type="file" id="projectPath" webkitdirectory>
+            <button class="btn" id="setting">Next</button>
+        </div>
 
-        $('#send').on('click', function () {
-            var data = document.getElementById('path').files[0].path;
-            ipcRenderer.send('request-mainprocess-action', data);
-        });
+        <div>
+            <div>
+                <ul id="entities"></ul>
+                <button id="getEntities" class="btn">Get Entities</button>
+            </div>
 
-
-        ipcRenderer.on('mainprocess-response', (event, arg) => {
-            console.log(arg); // prints "Hello World!"
-        });
-    </script>
+            <div>
+                <ul id="forms"></ul>
+                <button id="getForms" class="btn">Get Forms</button>
+            </div>
+            <input type="checkbox" name="autoCorrect" id="autoCorrect">auto Correct
+            <input type="checkbox" name="allInOne" id="allInOne">one file
+            <button id="submit" class="btn">Submit</button>
+        </div>
+    </div>
+    <script type="text/javascript" src="doSomething.js"></script>
 </body>
 
 </html>
